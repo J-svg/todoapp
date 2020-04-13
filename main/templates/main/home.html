@@ -1,0 +1,31 @@
+{% extends "main/header.html" %}
+{% block content %}
+    <h2>Add remainders</h2>
+    <div class="row mt-2">
+        <div class="col">
+        <form action="add/" method="post" class="form-inline">
+            {% csrf_token %}
+                    <input type="text" class="form-control mb-2 mr-sm-2" name="content" placeholder="Type here...">
+                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <ul class="list-group">
+                    {% for items in todo_items %}
+                        <li class="list-group-item">{{items.text}}
+                        <div class="float-right">
+                            <form method="post", action="delete/{{ items.id }}/">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </div>
+                        </li>
+                    {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
